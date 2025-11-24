@@ -1,17 +1,16 @@
 import React from 'react';
 
-// TypeScript 컴파일 오류 해결을 위해 props에 타입을 명시적으로 추가했습니다.
-/**
- * @typedef {object} InfoCardProps
- * @property {string} title
- * @property {string} value
- * @property {string} icon
- * @property {boolean} [isAddress=false]
- */
-/**
- * @param {InfoCardProps} props
- */
-const InfoCard = ({ title, value, icon, isAddress = false }) => (
+// 1. TypeScript Interface 정의: props에 사용할 타입을 명확히 정의합니다.
+interface InfoCardProps {
+  title: string;
+  value: string;
+  icon: string;
+  isAddress?: boolean; // 선택적 (optional) 속성
+}
+
+// --- Helper Component for Displaying Key Information ---
+// 2. 컴포넌트에 정의된 Interface를 적용하여 타입 오류를 해결합니다.
+const InfoCard: React.FC<InfoCardProps> = ({ title, value, icon, isAddress = false }) => (
   <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-xl transition-all duration-300 border border-zinc-200 dark:border-zinc-700">
     <div className="flex items-center gap-2 mb-1">
       <span className="text-xl text-indigo-500 dark:text-indigo-400">{icon}</span>
@@ -35,7 +34,7 @@ const InfoCard = ({ title, value, icon, isAddress = false }) => (
 
 // Main application component
 export default function App() {
-  // --- 사용자 정보 및 블록체인 주소 (이현 님께서 업데이트하신 정보로 설정되었습니다) ---
+  // --- 사용자 정보 및 블록체인 주소 (업데이트된 정보로 설정되었습니다) ---
   const studentId = "92113798"; // 학번
   const studentName = "이현"; // 이름
   const contractAddress = "0x0aEEBd8823Bde75228799BFDe6d9Ee1024b9B960"; // 배포된 컨트랙트 주소
